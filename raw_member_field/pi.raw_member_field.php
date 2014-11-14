@@ -61,8 +61,8 @@ class Raw_member_field {
 	    $this->EE =& get_instance();
       
       $memberFieldName = $this->EE->TMPL->fetch_param('field_name') ? $this->EE->TMPL->fetch_param('field_name') : '';
-      $memberId = $this->EE->TMPL->fetch_param('member_id') ? $this->EE->TMPL->fetch_param('member_id') : '';
-      
+      $memberId = ee()->session->userdata('member_id');
+
       if (!$memberFieldName || !$memberId) return;
       
       $fieldId = $this->EE->db->select('m_field_id')
@@ -100,10 +100,10 @@ class Raw_member_field {
 		
 		ob_start(); 
 		?>
-    This plugin will query the database for the value of a member data field
-    based on the field_name and member_id supplied.
+    This plugin will query the database for the value of the logged in member data field
+    based on the field_name supplied.
 		
-		{exp:raw_member_field field_name="Google_Plus_URL" member_id="{member_id}"}
+		{exp:raw_member_field field_name="Google_Plus_URL"}
 	
     Version 1.0
     ******************
